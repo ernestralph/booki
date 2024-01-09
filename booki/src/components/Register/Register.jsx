@@ -16,13 +16,11 @@ const Register = () => {
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [visible, setVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState({ __html: "" });
   
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setError({ __html: "" });
     setIsLoading(true);
 
 
@@ -36,8 +34,8 @@ const Register = () => {
       })
       .then(({ data }) => {
         setIsLoading(false);
-        
-         navigate("/otp-verification", { state: { userData: data } });
+        toast.success(`Registration Sucessful, You Proceed to OTP Verification`)
+        navigate("/otp-verification", { state: { userData: data } });
       })
       .catch((error) => {
         setIsLoading(false);
@@ -69,7 +67,7 @@ const Register = () => {
             <form className="space-y-6" onSubmit={handleSubmit}>
               <div>
                 <label
-                  htmlFor="email"
+                  htmlFor="name"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Full Name
@@ -81,6 +79,7 @@ const Register = () => {
                     id="name"
                     autoComplete="name"
                     value={name}
+                    placeholder="jone doe"
                     onChange={(e) => setName(e.target.value)}
                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                   />
@@ -100,6 +99,7 @@ const Register = () => {
                     id="email"
                     autoComplete="email"
                     value={email}
+                    placeholder="jonedoe@example.com"
                     onChange={(e) => setEmail(e.target.value)}
                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                   />
@@ -107,7 +107,7 @@ const Register = () => {
               </div>
               <div>
                 <label
-                  htmlFor="email"
+                  htmlFor="phone"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Phone Number
@@ -119,6 +119,7 @@ const Register = () => {
                     id="phone"
                     autoComplete="phone"
                     value={phone}
+                    placeholder="e.g +23485577432"
                     onChange={(e) => setPhone(e.target.value)}
                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                   />
@@ -199,23 +200,22 @@ const Register = () => {
                 </div>
               </div>
               <div>
-                {
-                  !isLoading ?
+                {!isLoading ? (
                   <button
-                  type="submit"
-                  className="group relative w-full h-[40px] flex justify-center py-2 px-4 border border-transparent text-md font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
-                >
-                  Submit
-                </button>
-                :
-                <button
-                  disabled
-                  type="submit"
-                  className="group relative w-full h-[40px] flex justify-center py-2 px-4 border border-transparent text-md font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
-                >
-                  <Loader />
-                </button>
-                }
+                    type="submit"
+                    className="group relative w-full h-[40px] flex justify-center py-2 px-4 border border-transparent text-md font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+                  >
+                    Submit
+                  </button>
+                ) : (
+                  <button
+                    disabled
+                    type="submit"
+                    className="group relative w-full h-[40px] flex justify-center py-2 px-4 border border-transparent text-md font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+                  >
+                    <Loader />
+                  </button>
+                )}
               </div>
 
               <div className={`${styles.normalFlex} w-full`}>

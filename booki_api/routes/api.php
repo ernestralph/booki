@@ -15,12 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->group(function () {
-    // logout route
-    Route::post('/logout', [UserController::class], 'logout');
-});
 Route::prefix('v1')->group(function () {
     Route::prefix('user')->group(function () {
+        Route::middleware('auth:sanctum')->group(function () {
+            // logout route
+            Route::post('/logout', [UserController::class, 'logout']);
+        });
         
         // Route for user registration
         Route::post('register', [UserController::class, 'register']);

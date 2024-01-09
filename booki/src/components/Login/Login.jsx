@@ -2,20 +2,49 @@ import React, { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import styles from "../../styles/styles";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import { toast } from "react-toastify";
 import Loader from "../Loader/Loader";
+import axiosClient from "../../axiosClient";
+import { useStateContext } from "../../context/ContextProvider";
 
-const Login = () => {
+const Login = () => { 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [visible, setVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = async (e) => {
+  const navigate = useNavigate();
+   const { setCurrentUser, setUserToken } = useStateContext();
+
+  const handleSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true);
-    
+
+    axiosClient
+      .post("user/login", {
+        email,
+        password,
+      })
+      .then(({ data }) => {
+        setIsLoading(false);
+        setCurrentUser(data.user);
+        setUserToken(data.token);
+        toast.success(`Login Successfully`);
+        navigate("/");
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        if (error.response) {
+          setIsLoading(false);
+          const finalErrors = Object.values(error.response.data.errors).reduce(
+            (accum, next) => [...accum, ...next],
+            []
+          );
+
+          toast.error(`${finalErrors}`);
+        }
+        console.error(error);
+      });
   };
 
   return (
@@ -44,6 +73,7 @@ const Login = () => {
                     id="email"
                     autoComplete="email"
                     value={email}
+                    placeholder="jonedoe@example.com"
                     onChange={(e) => setEmail(e.target.value)}
                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                   />
@@ -63,6 +93,7 @@ const Login = () => {
                     id="password"
                     autoComplete="current-password"
                     value={password}
+                    placeholder="*******"
                     onChange={(e) => setPassword(e.target.value)}
                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                   />

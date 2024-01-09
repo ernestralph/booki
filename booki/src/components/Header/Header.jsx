@@ -19,7 +19,7 @@ const Header = ({ activeHeading }) => {
       <div
         className={`${
           active === true ? "shadow-sm fixed top-0 left-0 z-10" : null
-        } transition hidden 800px:flex items-center justify-center w-full bg-[#3321c8] h-[70px]`}
+        } transition flex items-center justify-center w-full bg-[#3321c8] h-[70px]`}
       >
         <Navbar />
       </div>
