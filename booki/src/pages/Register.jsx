@@ -1,9 +1,13 @@
 import React from 'react'
-import { RegisterLayout } from '../components'
+import { Header, RegisterLayout } from '../components'
 
 const Register = () => {
   return (
-    <RegisterLayout />
+    <>
+      <Header activeHeading={1} />
+      <RegisterLayout />
+
+    </>
   )
 }
 

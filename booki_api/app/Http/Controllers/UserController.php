@@ -27,7 +27,7 @@ class UserController extends Controller
         return response([
             'user' => $user,
             'token' => $token
-        ]);
+        ], 201);
     }
 
     public function login(LoginRequest $request)

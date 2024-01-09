@@ -1,10 +1,12 @@
 import React from 'react'
-import { LoginLayout } from '../components'
+import { Header, LoginLayout } from '../components'
 
 const Login = () => {
-  return <>
-  <LoginLayout />
-  </>;
-}
+  return (
+    <>
+      <Header activeHeading={1} />
+      <LoginLayout />
+    </>
+  );};
 
 export default Login

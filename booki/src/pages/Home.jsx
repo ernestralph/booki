@@ -1,10 +1,12 @@
 import React from 'react'
-import { HomeLayout } from '../components'
+import { Header, HomeLayout } from '../components'
 
 const Home = () => {
-  console.log("yes");
   return (
-    <HomeLayout />
+    <>
+      <Header activeHeading={0}/>
+      <HomeLayout />
+    </>
   )
 }
 

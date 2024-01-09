@@ -1,6 +1,6 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import { GuestLayout, MainLayout } from "./components";
-import { Register, Login, Home, Book } from "./pages";
+import { Register, Login, Home, Book, OtpPage } from "./pages";
 
 const router = createBrowserRouter([
   {
@@ -16,7 +16,7 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/book",
+        path: "/book/:bookName",
         element: <Book />,
       },
     ],
@@ -32,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+      {
+        path: "/otp-verification",
+        element: <OtpPage />,
       },
     ],
   },

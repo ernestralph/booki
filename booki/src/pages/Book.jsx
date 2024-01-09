@@ -1,10 +1,13 @@
 import React from 'react'
-import { BookLayout } from '../components'
+import { BookLayout, Header } from '../components'
 
 const Book = () => {
   return (
-    <BookLayout />
-  )
+    <>
+      <Header />
+      <BookLayout />
+    </>
+  );
 }
 
 export default Book

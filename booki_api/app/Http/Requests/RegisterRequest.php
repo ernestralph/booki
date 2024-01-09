@@ -29,7 +29,7 @@ class RegisterRequest extends FormRequest
             'email' => 'required|email|string|unique:users,email',
             'phone' => [
             'required',
-            'regex:/^[0-9]{10,}$/',
+            'regex:/[0-9]{10,}$/',
             ],
             'password' => [
                 'required',
