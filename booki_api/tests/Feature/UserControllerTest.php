@@ -89,14 +89,14 @@ class UserControllerTest extends TestCase
     }
 
     /** @test */
-    // public function it_logs_out_a_user()
-    // {
-    //     $user = User::factory()->create();
-    //     $token = $user->createToken('main')->plainTextToken;
+     public function it_logs_out_a_user()
+     {
+         $user = User::factory()->create();
+         $token = $user->createToken('main')->plainTextToken;
 
-    //     $response = $this->actingAs($user)->postJson('/api/logout');
+         $response = $this->actingAs($user)->postJson('/api/logout');
 
-    //     $response->assertStatus(200)
-    //         ->assertJson(['success' => true]);
-    // }
+         $response->assertStatus(200)
+             ->assertJson(['success' => true]);
+     }
 }
